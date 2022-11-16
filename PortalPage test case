@@ -1,0 +1,30 @@
+package com.dsalgo.testCases;
+
+import org.testng.annotations.Test;
+import org.testng.Assert;
+
+import com.dsalgo.pageObjects.PortalPage;
+
+public class TC_PortalPage extends BaseClass {
+	
+	@Test
+	public void portalPagetest()
+	{
+		
+	driver.get(baseURL);
+	PortalPage pp = new PortalPage(driver);
+	
+	String actHeading1 = pp.getHeading1();
+	String expHeading1 = "Preparing for the Interviews";
+	Assert.assertEquals(actHeading1, expHeading1);
+	//heading2
+	String actHeading2=pp.getHeading2();
+	String expHeading2 = "You are at the right place";
+	Assert.assertEquals(actHeading2, expHeading2);
+
+	pp.clickgetstarted();
+	}	
+}
+
+
+
