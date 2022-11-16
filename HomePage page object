@@ -1,0 +1,131 @@
+package com.dsalgo.pageObjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import io.qameta.allure.Step;
+
+public class HomePage {
+
+	WebDriver ldriver;
+	public HomePage(WebDriver rdriver)
+	{
+		ldriver = rdriver;
+		 PageFactory.initElements(rdriver, this);
+	}
+@FindBy (xpath = "//a[text()='NumpyNinja']") WebElement Title;
+
+//@FindBy (xpath = "//a[@data-toggle='dropdown']") WebElement DsOpenDropdown;
+@FindBy(xpath ="//a[text()='Data Structures']") public WebElement DsOpenDropdown;
+@FindBy (xpath="//a[text()='Arrays']") public WebElement ArrayDropdown;
+@FindBy (xpath="//a[text()='Linked List']") public WebElement LinkedListDropdown;
+@FindBy (xpath="//a[text()='Stack']") public WebElement StackDropdown;
+@FindBy (xpath="//a[text()='Queue']") public WebElement QueueDropdown;
+@FindBy (xpath="//a[text()='Tree']") public WebElement TreeDropdown ;
+@FindBy (xpath="//a[text()='Graph']") public WebElement GraphDropdown ;
+@FindBy(xpath = "//a[@href='linked-list']") WebElement LinkedListBtn ;
+@FindBy(xpath="//a[@href='stack']") WebElement Stack;
+@FindBy (xpath="//div[@class='nav-item dropdown show']") public WebElement DsCloseDropdown;
+
+@FindBy (xpath = "//a[contains(@href,'data-structures-introduction')]") public WebElement DataStructuresGetStarted;
+
+@FindBy (xpath= "//div[contains(text(), 'You are not logged in')]") public WebElement NotlogedinMsg;
+
+@FindBy (xpath = "//a[contains(@href,'/register')]") WebElement Register;
+@FindBy (xpath ="//a[contains(@href,'/login')]") WebElement Signin;
+@FindBy (xpath="//a[contains(@href,'/logout')]") WebElement Signout;
+@FindBy (xpath="//div[@class='alert alert-primary']") WebElement LoggedinMsg;
+
+@Step("Getting Homepage title")
+public String verifytitle()
+{
+	//String NN=Title.getText();
+	//return NN;
+	return ldriver.getTitle();
+}
+@Step("Opens dropdown")
+public void OpenDsDropdown()
+{
+	DsOpenDropdown.click();
+	
+}
+@Step("Array")
+public void Array()
+{
+	ArrayDropdown.click();
+}
+@Step("Linkedlist")
+public void LinkedList()
+{
+	LinkedListDropdown.click();
+}
+
+public void Stack()
+{
+	StackDropdown.click();
+}
+public void Queue()
+{
+	QueueDropdown.click();
+}
+public void Tree()
+{
+	TreeDropdown.click();
+}
+public void Graph()
+{
+	GraphDropdown.click();
+}
+public void CloseDSDropdown()
+{
+	DsCloseDropdown.click();
+}
+public void DsGetStarted()
+{
+	DataStructuresGetStarted.click();
+}
+public String Notloggedin()
+{
+	String message = NotlogedinMsg.getText();
+	//System.out.println("You are not logged in");
+	return message;
+}
+public void ClickRegisterLink()
+{
+	Register.click();
+}
+public void CLickSigninLink()
+{
+	Signin.click();
+}
+public void Clicksignout()
+{
+	Signout.click();
+}
+public void ClickLinkedListBtn()
+{
+	LinkedListBtn.click();
+}
+public String YouAreLoggedinmsg()
+{
+	String message = LoggedinMsg.getText();
+	//System.out.println("You are not logged in");
+	return message;
+}	
+public void ClickStack()
+{
+	Stack.click();
+}
+}
+
+
+
+
+
+
+
+
+
+
