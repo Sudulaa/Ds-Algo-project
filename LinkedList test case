@@ -1,0 +1,337 @@
+package com.dsalgo.testCases;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import com.dsalgo.Listener.AllureListener;
+import com.dsalgo.pageObjects.HomePage;
+import com.dsalgo.pageObjects.LinkedList;
+import com.dsalgo.pageObjects.LoginPage;
+import com.dsalgo.pageObjects.PortalPage;
+import com.dsalgo.pageObjects.RegisterPage;
+import com.dsalgo.utilities.Loggerclass;
+
+import io.qameta.allure.Description;
+
+@Listeners({AllureListener.class})
+public class TC_LinkedList extends BaseClass {
+	PortalPage pp;
+	HomePage hp;
+	LoginPage lp;
+	RegisterPage rp;
+	LinkedList ll;
+	
+	@BeforeClass
+	public void setup4() throws InterruptedException
+	{
+		pp = new PortalPage(driver);
+		hp = new HomePage(driver);
+		lp = new LoginPage(driver);
+		rp = new RegisterPage(driver);
+		ll = new LinkedList(driver);
+		Thread.sleep(1000);
+	}
+		public void gotoLinkedList()
+	{
+		
+		pp.clickgetstarted();
+		hp.CLickSigninLink();
+		lp.setUserName(username);
+		Loggerclass.info("Username entered");
+		lp.setPassword(password);
+		Loggerclass.info("Password entered");
+		lp.clickLoginButton();
+		Loggerclass.info("Clicked on Login Button");
+		//hp.ClickLinkedListBtn();
+		//ll.ClickIntroLink();
+	}
+	
+@Test(priority=1)
+@Description("Testing LinkedList button")
+public void LlButton()
+{
+	gotoLinkedList();
+    if(hp.verifytitle().equals("NumpyNinja"))
+	{
+		hp.ClickLinkedListBtn();
+		//Loggerclass.info("Clicked on LinkedList button");
+		if(driver.getTitle().equals("Linked List"))
+		{
+			Assert.assertTrue(true);
+			Loggerclass.info("Verified Linked List landing page");
+		}
+	}
+    else
+    {
+    	Assert.assertTrue(false);
+    	Loggerclass.error("Invalid title");
+    }
+}
+@Test(priority=2)
+@Description("Testing Introduction")
+public void TestIntroduction() throws InterruptedException
+{
+	if(driver.getTitle().equals("Linked List"))
+	{
+		ll.ClickIntroLink();
+		Loggerclass.info("Clicked on Introduction Link");
+		if(driver.getTitle().equals("Introduction"))
+		{
+			Assert.assertTrue(true);
+			Loggerclass.info("Validated Introduction title");
+			ll.ClickTryHereBtn();
+			Loggerclass.info("Clicked try here button");
+			ll.TestEditor();
+			Loggerclass.info("Gave code in test editor");
+			ll.ClickRunBtn();
+			Loggerclass.info("Clicked on run button");
+		}
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid title");
+		}
+		driver.navigate().back();
+	}
+	else
+	{
+		gotoLinkedList();
+		hp.ClickLinkedListBtn();
+		TestIntroduction();
+	}
+}
+@Test(priority=3)
+@Description("Testing Creating LinkedList")
+public void TestCreateLl() throws InterruptedException
+{
+	if(driver.getTitle().equals("Introduction"))
+	{
+		ll.ClickCreateLinkedListLink();
+		Loggerclass.info("Clicked on create linked list");
+		if(driver.getTitle().equals("Creating Linked LIst"))
+		{
+			Assert.assertTrue(true);
+		    Loggerclass.info("Validated Creating Linked LIst title");
+		    ll.ClickTryHereBtn();
+		    ll.TestEditor();
+		    Loggerclass.info("Gave code in test editor");
+		    ll.ClickRunBtn();
+		    Loggerclass.info("Clicked on run button");
+	    }
+		else
+		{
+			Assert.assertTrue(false);
+		    Loggerclass.info("invalid title");
+		}
+		driver.navigate().back();
+	}
+	else
+	{
+		gotoLinkedList();
+		hp.ClickLinkedListBtn();
+		ll.ClickIntroLink();
+		TestCreateLl();
+	}
+}
+@Test(priority=4)
+@Description("Testing Types of Linked Lists")
+public void TestLlTypes() throws InterruptedException
+{
+	Thread.sleep(1000);
+	if(driver.getTitle().equals("Creating Linked LIst"))
+	{
+		ll.ClickLlTypesLink();
+		Loggerclass.info("Clicked on types of linked list");
+		if(driver.getTitle().equals("Types of Linked List"))
+		{
+			Assert.assertTrue(true);
+			Loggerclass.info("Validated Types of Linked List title");
+			ll.ClickTryHereBtn();
+			ll.TestEditor();
+			Loggerclass.info("Gave code in test editor");
+			ll.ClickRunBtn();
+			Loggerclass.info("Clicked on run button");
+			}
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid Title");
+		}
+		driver.navigate().back();
+	}
+	else
+	{
+		gotoLinkedList();
+	    hp.ClickLinkedListBtn();
+	    ll.ClickIntroLink();
+	    ll.ClickCreateLinkedListLink();
+	    TestLlTypes();
+	}	
+}
+@Test(priority=5)
+@Description("Testing Implement Linked List in Python")
+public void TestImplementLl() throws InterruptedException
+{
+	Thread.sleep(1000);
+	if(driver.getTitle().equals("Types of Linked List"))
+	{
+	    ll.ClickImplementLlLink();
+	    System.out.println("clicked implementation");
+		if(driver.getTitle().equals("Implement Linked List in Python"))
+		{ 
+			Assert.assertTrue(true);
+			Loggerclass.info("Validated Implement Linked List in Python title");
+			ll.ClickTryHereBtn();
+			ll.TestEditor();
+	        Loggerclass.info("Gave code in test editor");
+	        ll.ClickRunBtn();
+	        Loggerclass.info("Clicked on run button");
+		}
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid title");
+		}
+		driver.navigate().back();
+	}	
+		else
+		{
+			gotoLinkedList();
+		    hp.ClickLinkedListBtn();
+		    ll.ClickIntroLink();
+		    ll.ClickLlTypesLink();
+		    TestImplementLl();
+		}
+}
+@Test(priority=6)
+@Description("Testing Traversal")
+public void TestTraversal() throws InterruptedException
+{
+	Thread.sleep(1000);
+	if(driver.getTitle().equals("Implement Linked List in Python"))
+	{
+		ll.ClickTraversalLink();
+		if(driver.getTitle().equals("Traversal"))
+		{
+			Assert.assertTrue(true);
+			Loggerclass.info("Validated Traversal title");
+			ll.ClickTryHereBtn();
+			ll.TestEditor();
+			Loggerclass.info("Gave code in test editor");
+	        ll.ClickRunBtn();
+	        Loggerclass.info("Clicked on run button");
+        }
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid title");
+		}
+		driver.navigate().back();
+	}
+	else
+	{
+		gotoLinkedList();
+	    hp.ClickLinkedListBtn();
+	    ll.ClickIntroLink();
+	    ll.ClickImplementLlLink();
+	    TestTraversal();
+	}    
+}
+@Test(priority=7)
+@Description("Testing Insertion")
+public void TestInsertion() 
+{
+	if(driver.getTitle().equals("Traversal"))
+	{
+		ll.ClickInsertionLink();
+		if(driver.getTitle().equals("Insertion"))
+		{
+		Assert.assertTrue(true);
+		Loggerclass.info("Validated Insertion title");
+		ll.ClickTryHereBtn();
+	    ll.TestEditor();
+	    Loggerclass.info("Gave code in test editor");
+	    ll.ClickRunBtn();
+	    Loggerclass.info("Clicked on run button");
+	}
+	else
+	{
+		Assert.assertTrue(false);
+		Loggerclass.info("Invalid title");
+	}
+		driver.navigate().back();
+	}
+	else
+	{
+		gotoLinkedList();
+	    hp.ClickLinkedListBtn();
+	    ll.ClickIntroLink();
+	    ll.ClickTraversalLink();
+	    TestInsertion();
+	}    
+}
+@Test(priority=8)
+@Description("Testing Deletion")
+public void TestDeletion()
+{
+	if(driver.getTitle().equals("Insertion"))
+	{
+		ll.ClickDeletionLink();
+		if(driver.getTitle().equals("Deletion"))
+		{
+			Assert.assertTrue(true);
+			Loggerclass.info("Validated Deletion title");
+	        ll.ClickTryHereBtn();
+	        ll.TestEditor();
+	        Loggerclass.info("Gave code in test editor");
+	        ll.ClickRunBtn();
+	        Loggerclass.info("Clicked on run button");
+        }
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid Deletion title");
+		}
+		driver.navigate().back();
+	}
+	else
+	{
+		gotoLinkedList();
+        hp.ClickLinkedListBtn();
+        ll.ClickIntroLink();
+        ll.ClickInsertionLink();
+        TestDeletion();
+    }
+}
+@Test(priority=9)
+@Description("Testing Practice Questions")
+public void TestPracticeQuestions()
+{
+	if(driver.getTitle().equals("Deletion"))
+	{
+		ll.ClickPracticeLink();
+		if(driver.getTitle().equals("Practice Questions"))
+	{
+		Assert.assertTrue(true);
+		Loggerclass.info("Validated Practice Questions title");
+	}	
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid title");
+			
+		}
+		driver.navigate().back();		
+    }
+	else
+	{
+		gotoLinkedList();
+	    hp.ClickLinkedListBtn();
+        ll.ClickIntroLink();
+        ll.ClickDeletionLink();
+        TestPracticeQuestions();
+	}    
+}
+}
