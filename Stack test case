@@ -1,0 +1,246 @@
+package com.dsalgo.testCases;
+
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
+
+import com.dsalgo.Listener.AllureListener;
+import com.dsalgo.pageObjects.HomePage;
+import com.dsalgo.pageObjects.LoginPage;
+import com.dsalgo.pageObjects.PortalPage;
+import com.dsalgo.pageObjects.RegisterPage;
+import com.dsalgo.pageObjects.Stack;
+import com.dsalgo.utilities.Loggerclass;
+
+import io.qameta.allure.Description;
+
+@Listeners({AllureListener.class})
+public class TC_Stack extends BaseClass {
+	PortalPage pp;
+	HomePage hp;
+	LoginPage lp;
+	RegisterPage rp;
+	Stack ss;
+	@BeforeClass
+public void Setup5()
+	{
+		pp = new PortalPage(driver);
+		hp = new HomePage(driver);
+		lp = new LoginPage(driver);
+		rp = new RegisterPage(driver);
+		ss = new Stack(driver);
+	}
+	public void gotoStack()
+{
+	
+	pp.clickgetstarted();
+	hp.CLickSigninLink();
+	lp.setUserName(username);
+	Loggerclass.info("Username entered");
+	lp.setPassword(password);
+	Loggerclass.info("Password entered");
+	lp.clickLoginButton();
+	Loggerclass.info("Clicked on Login Button");
+	
+}
+@Test(priority=1)
+@Description("Testing Stack button on home page")
+public void TestStack() throws InterruptedException
+{
+	Thread.sleep(1000);
+	gotoStack();
+	if(hp.verifytitle().equals("NumpyNinja"))
+	{
+		hp.ClickStack();
+		Loggerclass.info("clicked on stack button");
+		if(driver.getTitle().equals("Stack"))
+		{
+			Assert.assertTrue(true);
+			Loggerclass.info("Validated Stack heading");
+		}
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid Stack title");
+		}
+		
+	}
+}
+@Test(priority=2)
+@Description("testing Operations in Stack")
+public void TestOperationsInStack() throws InterruptedException
+{
+	if(driver.getTitle().equals("Stack"))
+	{
+		ss.ClickStackOperations();
+		if(driver.getTitle().equals("Operations in Stack"))
+		{
+			Assert.assertTrue(true);
+			Loggerclass.info("Verified Operations in stack title");
+	        ss.ClickTryHereBtn();
+		    Loggerclass.info("Clicked on try here button");
+		    ss.TestEditor();
+		    Loggerclass.info("Gave code in test editor");
+		    ss.ClickRunBtn();
+		    Loggerclass.info("Clicked on run button");
+		    	
+	    }
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid Operations in Stack title");
+		}
+		driver.navigate().back();
+	}
+	else
+	{
+		gotoStack();
+		hp.ClickStack();
+		TestOperationsInStack();
+		
+	}
+}	
+@Test(priority=3)
+@Description("Testing Implementations")
+public void TestImplementation() throws InterruptedException
+{
+	if(driver.getTitle().equals("Operations in Stack"))
+	{
+		Thread.sleep(500);
+		ss.ClickImplementation();
+		if(driver.getTitle().equals("Implementation"))
+		{
+			Assert.assertTrue(true);
+		    Loggerclass.info("Verified Implementation Title");
+		    ss.ClickTryHereBtn();
+		    Loggerclass.info("Clicked on try here button");
+		    ss.TestEditor();
+		    Loggerclass.info("Gave code in test editor");
+		    ss.ClickRunBtn();
+		    Loggerclass.info("Clicked on run button");
+		   	
+	    }
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid Implementation Title");
+        }
+		 driver.navigate().back();
+	}
+	else
+	{
+		gotoStack();
+		hp.ClickStack();
+		ss.ClickStackOperations();
+		TestImplementation();
+	}
+}
+@Test(priority=4)
+@Description("Testing Applications")
+public void TestApplications() throws InterruptedException
+{
+	if(driver.getTitle().equals("Implementation"))
+	{
+		Thread.sleep(500);
+		ss.ClickApplications();
+		
+		if(driver.getTitle().equals("Applications"))
+		{
+			Assert.assertTrue(true);
+		    Loggerclass.info("Verified Applications title");
+		    ss.ClickTryHereBtn();
+		    Loggerclass.info("Clicked on try here button");
+		    ss.TestEditor();
+		    Loggerclass.info("Gave code in test editor");
+		    ss.ClickRunBtn();
+		    Loggerclass.info("Clicked on run button");
+		    	
+	    }
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.info("Invalid Applications title");
+		}
+		driver.navigate().back();
+    }
+	else
+	{
+		gotoStack();
+		hp.ClickStack();
+		ss.ClickStackOperations();
+		ss.ClickImplementation();
+		TestApplications();
+		
+	}
+	
+}
+@Test(priority=5)
+@Description("Testing Practice Questions")
+public void TestPracticeQuestions() throws InterruptedException
+	{
+		if(driver.getTitle().equals("Applications"))
+		{
+			Thread.sleep(500);
+			ss.ClickPracticeQuestions();
+			if(driver.getTitle().equals("Practice Questions"))
+			{
+				Assert.assertTrue(true);
+				Loggerclass.info("You are on Practice questions Page");
+			}
+			else
+			{
+				Assert.assertTrue(false);
+				Loggerclass.info("Practice questions title not valid");
+			}
+		}
+		else
+		{
+		gotoStack();
+		hp.ClickStack();
+		ss.ClickStackOperations();
+		ss.ClickApplications();
+		TestPracticeQuestions();
+		}
+		
+	}
+}
+		
+
+
+  	
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
