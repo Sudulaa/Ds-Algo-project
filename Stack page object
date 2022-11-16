@@ -1,0 +1,85 @@
+package com.dsalgo.pageObjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class Stack {
+	WebDriver ldriver;
+	public Actions action;
+	public Stack(WebDriver rdriver)
+	{
+		ldriver = rdriver;
+		PageFactory.initElements(rdriver, this);
+		action = new Actions(this.ldriver); 
+		
+	}
+	@FindBy(xpath="//pre[@role='presentation']/span") public WebElement Editor;
+	@FindBy(xpath = "//button[@type='button']") WebElement RunBtn ;
+	@FindBy(xpath = "//a[text()='Try here>>>']") WebElement TryHereBtn;
+	
+	@FindBy(xpath="//head/title[text()='Stack']") WebElement StackTitle;
+	@FindBy(xpath="//a[@href='operations-in-stack']") WebElement StackOperations;
+	@FindBy(xpath="//p[text()='Operations in Stack']") WebElement StackOperationsTitle;
+	
+	@FindBy(xpath="//a[@href='/stack/implementation/']") WebElement Implementation;
+	@FindBy(xpath="//p[text()='Implementation']") WebElement ImplementationTitle;
+	
+	@FindBy(xpath="//a[@href='/stack/stack-applications/']") WebElement Applications;
+	@FindBy(xpath="//p[text()='Applications']") WebElement ApplicationsTitle;
+	
+	@FindBy(xpath="//a[@href='/stack/practice']") WebElement PracticeQuestions;
+	@FindBy(xpath="//head/title[text()=' Practice Questions ']") WebElement PracticeQuestionsTitle;
+	
+	public void ClickRunBtn()
+	   {
+		RunBtn.click();
+	   }
+	public void ClickTryHereBtn()
+	   {
+		   TryHereBtn.click(); 
+	   }
+	 public void TestEditor()
+	   {
+	     action.moveToElement(Editor).click().sendKeys("print('Hello World')").build().perform();
+	   }
+	 public String VerifyStackTitle()
+	 {
+		 return ldriver.getTitle();
+	 }
+	 public void ClickStackOperations()
+	 {
+		 StackOperations.click();
+	 }
+	 public String VerifyStackOperationsTitle()
+	 {
+		 return ldriver.getTitle();
+	 }
+	 public void ClickImplementation()
+	 {
+		 Implementation.click();
+	 }
+	 public String VerifyImplementationTitle()
+	 {
+		 return ldriver.getTitle();
+	 }
+	 public void ClickApplications()
+	 {
+		 Applications.click();
+	 }
+	 public String VerifyApplicationsTitle()
+	 {
+		 return ldriver.getTitle();
+	 }
+	 public void ClickPracticeQuestions()
+	 {
+		 PracticeQuestions.click();
+	 }
+	 public String VerifyPracticeqTitle()
+	 {
+		 return ldriver.getTitle();
+	 }
+	 
+}
