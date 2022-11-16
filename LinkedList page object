@@ -1,0 +1,143 @@
+package com.dsalgo.pageObjects;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class LinkedList {
+	WebDriver ldriver;
+	public Actions action;
+	public LinkedList(WebDriver rdriver)
+	{
+		ldriver = rdriver;
+		PageFactory.initElements(rdriver, this);
+		action = new Actions(this.ldriver); 
+		
+	}
+	@FindBy(xpath = "//head/title[text()='Linked List']") WebElement LllandingTitle;
+	
+	
+	@FindBy(xpath="//p[text()='Introduction']") WebElement LlIntroPageTitle;
+	@FindBy(xpath = "//a[text()='Introduction']") WebElement IntroductionLink;
+
+	@FindBy(xpath = "//p[text()='Creating Linked LIst']") WebElement CreateLlTitle;
+	@FindBy(xpath="//a[@href='/linked-list/creating-linked-list/']") WebElement CreateLinkedListLink;
+	
+	@FindBy(xpath = "//p[text()='Types of Linked List']" ) WebElement TypesLlTitle;
+	@FindBy(xpath="//a[@href='/linked-list/types-of-linked-list/']") WebElement LlTypesLink;
+	
+	@FindBy(xpath = "//p[text()='Implement Linked List in Python']") WebElement ImplementLlTitle;
+	@FindBy(xpath = "//a[@href='/linked-list/implement-linked-list-in-python/']") WebElement ImplementLlLink;
+	
+	@FindBy(xpath = "//p[text()='Traversal']" ) WebElement TraversalTitle;
+	@FindBy(xpath = "//a[@href='/linked-list/traversal/']") WebElement TraversalLink;
+	
+	@FindBy(xpath = "//a[text()='Insertion']" ) WebElement InsertionTitle;
+	@FindBy(xpath = "//a[@href='/linked-list/insertion-in-linked-list/'] ") WebElement InsertionLink;
+	
+	@FindBy(xpath = "//a[text()='Deletion']" ) WebElement DeletionTitle;
+	@FindBy(xpath = "//a[text()='Deletion']") WebElement DeletionLink;
+	
+	@FindBy(xpath = "//a[@href='/linked-list/practice']") WebElement PracticeLink;
+
+	@FindBy(xpath = "//title[text()=' Practice Questions ']") WebElement PracticeTitle;
+	
+	@FindBy(xpath="//pre[@role='presentation']/span") public WebElement Editor;
+	@FindBy(xpath = "//button[@type='button']") WebElement RunBtn ;
+	@FindBy(xpath = "//a[text()='Try here>>>']") WebElement TryHereBtn;
+   public void ClickRunBtn()
+   {
+	   RunBtn.click();
+   }
+   public void ClickTryHereBtn()
+   {
+	   TryHereBtn.click(); 
+   }
+   
+   public String verifyLlpageTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public String VerifyIntroPageTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   //Introduction
+   public void ClickIntroLink()
+   {
+	   IntroductionLink.click();
+   }
+   //Create linked list
+   public String VerifyCreateLlTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public void ClickCreateLinkedListLink()
+   {
+	   CreateLinkedListLink.click();
+   }
+   
+   //LinkedLidt types
+   public String VerifyTypesLlTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public void ClickLlTypesLink()
+   {
+	   LlTypesLink.click();
+   }
+   
+   //Implement Linkedlist in python
+   public String VerifyImplementLlTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public void ClickImplementLlLink()
+   {
+	   ImplementLlLink.click();
+   }
+   //Traversal
+   public String VerifyTraversalTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public void ClickTraversalLink()
+   {
+	   TraversalLink.click();
+   }
+   //insertion
+   public String VerifyInsertionTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public void ClickInsertionLink()
+   {
+	   InsertionLink.click();
+   }
+   //Deletion
+   public String VerifyDeletionTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public void ClickDeletionLink()
+   {
+	   DeletionLink.click();
+   }
+   public void ClickPracticeLink()
+   {
+	   PracticeLink.click();
+   }
+   public String VerifyPracticeTitle()
+   {
+	   return ldriver.getTitle();
+   }
+   public void TestEditor()
+   {
+     action.moveToElement(Editor).click().sendKeys("print('Hello World')").build().perform();
+    
+   }
+   
+  
+}
