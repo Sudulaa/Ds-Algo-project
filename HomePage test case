@@ -1,0 +1,235 @@
+package com.dsalgo.testCases;
+
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.testng.Assert;
+
+import com.dsalgo.Listener.AllureListener;
+//import org.testng.annotations.BeforeClass;
+//import org.testng.annotations.Test;
+import com.dsalgo.pageObjects.HomePage;
+import com.dsalgo.pageObjects.LoginPage;
+import com.dsalgo.pageObjects.PortalPage;
+import com.dsalgo.pageObjects.RegisterPage;
+import com.dsalgo.utilities.Loggerclass;
+
+import io.qameta.allure.Description;
+//import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
+@Listeners({AllureListener.class})
+public class TC_HomePage extends BaseClass {
+	PortalPage pp;
+	HomePage hp;
+	RegisterPage rp;
+	LoginPage lp;
+	
+	@BeforeClass
+	public void setup1() throws InterruptedException
+	{
+		 pp = new PortalPage(driver);
+		 hp = new HomePage(driver);
+		 rp = new RegisterPage(driver);
+		 lp= new LoginPage(driver);
+		 Thread.sleep(1000);
+	}
+
+@Test(priority=1, description="Verifying homepage Title ")
+@Severity(SeverityLevel.NORMAL)
+@Description("Description: Verify HomePage title")
+@Story("Story name: Check Loginpage title")
+public void HomePAgetest() throws Exception
+   {
+	pp.clickgetstarted();
+	if(hp.verifytitle().equals("NumpyNinja"))
+	{
+		Assert.assertTrue(true);
+		Loggerclass.info("Validated Home page title");
+	}
+	else 
+	{
+		try 
+		{
+			Loggerclass.info("NumpyNinja");
+	        Assert.assertTrue(false);
+	    }
+	      catch(Exception e)
+	         {
+	         e.printStackTrace();
+	         Assert.assertTrue(false);
+	         }
+		}
+		}
+		
+
+@Test(priority=2)
+@Severity(SeverityLevel.NORMAL)
+@Description("Description: Verifydropdown")
+@Story("Story name: Check Dropdown")
+public void DropdownTest()
+{
+	if(hp.verifytitle().equals("NumpyNinja"))
+		{
+		    hp.OpenDsDropdown();
+			Assert.assertEquals(hp.DsOpenDropdown.getText(), "Data Structures");
+			Loggerclass.info("Validated datastructure dropdown");
+			Assert.assertEquals(hp.ArrayDropdown.getText(), "Arrays");
+			Loggerclass.info("Validated Arrays dropdown");
+			Assert.assertEquals(hp.LinkedListDropdown.getText(), "Linked List");
+			Loggerclass.info("Validated Linked List dropdown");
+			Assert.assertEquals(hp.StackDropdown.getText(), "Stack");
+			Loggerclass.info("Validated Stack dropdown");
+			Assert.assertEquals(hp.QueueDropdown.getText(), "Queue");
+			Loggerclass.info("Validated Queue dropdown");
+			Assert.assertEquals(hp.TreeDropdown.getText(), "Tree");
+			Loggerclass.info("Validated Tree dropdown");
+			Assert.assertEquals(hp.GraphDropdown.getText(), "Graph");
+			Loggerclass.info("Validated Graph dropdown");
+			Loggerclass.info("validated dropdown options");
+			hp.CloseDSDropdown();
+		}
+		else
+		
+		{
+			pp.clickgetstarted();
+			DropdownTest();
+
+		}	
+	}
+@Test(priority=3)
+@Description("Description: Validating DS dropdown")
+@Story("Story Name: Click any dropdown")
+public void ClickAnyDropdownlist() throws InterruptedException
+{
+	if(hp.verifytitle().equals("NumpyNinja"))
+	  {
+		Thread.sleep(1000);	
+	    hp.OpenDsDropdown();
+	    hp.Stack();
+	    Assert.assertEquals(hp.Notloggedin(), "You are not logged in");
+        Loggerclass.info("You are not logged in");
+	  }
+	else
+	{
+		pp.clickgetstarted();
+		ClickAnyDropdownlist();
+	}
+
+ }
+	
+@Test(priority=4)
+@Description("Validating data structure get started button")
+public void TestGsBtn()
+{
+	if(hp.verifytitle().equals("NumpyNinja"))
+	 {
+		hp.DsGetStarted();
+		Assert.assertEquals(hp.Notloggedin(), "You are not logged in");
+		Loggerclass.info("You are not logged in");
+	 }
+	else
+	 {
+		pp.clickgetstarted();
+		TestGsBtn();
+	 }
+}
+	
+@Test(priority=5)
+public void TestSignin()
+{
+	if(hp.verifytitle().equals("NumpyNinja"))
+	{
+		hp.CLickSigninLink();
+		Loggerclass.info("Clicked on signin link");
+	if(lp.LoginPageTitle().equals("Login"))
+	{
+		Assert.assertTrue(true);
+		Loggerclass.info("Validated Login page title");
+	}
+	else
+	{
+		Assert.assertTrue(false);
+		Loggerclass.info("Login page validation failed");
+		try
+		{
+			Loggerclass.info("Page title does not match Login");
+		    Assert.assertTrue(false);
+		}
+		   catch(Exception e)
+		      {
+		      e.printStackTrace();
+		      Assert.assertTrue(false);
+		      }
+		}
+	driver.navigate().back();
+	}
+
+	else
+	{
+		pp.clickgetstarted();
+		TestSignin();
+	}
+}
+		
+@Test(priority=6)
+public void TestRegister() throws InterruptedException
+{
+	//if(lp.LoginPageTitle().equals("Login"))
+	Thread.sleep(1000);
+	if(hp.verifytitle().equals("NumpyNinja"))
+	{
+		hp.ClickRegisterLink();
+		if(rp.RPTitle().equals("Registration"))
+			
+		{
+			Assert.assertTrue(true);	
+			Loggerclass.info("Validated Registration Title");
+		}
+		else
+		{
+			Assert.assertTrue(false);
+			Loggerclass.debug("Registration validation failed");
+			try
+			{
+				Loggerclass.info("Page title does not match Registration");
+			    Assert.assertTrue(false);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				Assert.assertTrue(false);
+		    }
+		}
+	}
+	else
+	{
+		pp.clickgetstarted();
+		TestRegister();
+	}
+}
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	
+	
+
+
+
