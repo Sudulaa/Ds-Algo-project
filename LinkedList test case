@@ -44,8 +44,6 @@ public class TC_LinkedList extends BaseClass {
 		Loggerclass.info("Password entered");
 		lp.clickLoginButton();
 		Loggerclass.info("Clicked on Login Button");
-		//hp.ClickLinkedListBtn();
-		//ll.ClickIntroLink();
 	}
 	
 @Test(priority=1)
@@ -56,7 +54,6 @@ public void LlButton()
     if(hp.verifytitle().equals("NumpyNinja"))
 	{
 		hp.ClickLinkedListBtn();
-		//Loggerclass.info("Clicked on LinkedList button");
 		if(driver.getTitle().equals("Linked List"))
 		{
 			Assert.assertTrue(true);
